@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -147,45 +147,53 @@ function CountrySelector() {
       columnNumber: 23
     }
   }, "Error...");
+  let newStructure = {
+    countries: {},
+    iso3: {}
+  };
+
+  for (let country of countries.countries) {
+    newStructure.countries[country.name] = country.iso2;
+    newStructure.iso3[country.iso2] = country.iso3;
+  }
+
   return __jsx("div", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15,
+      lineNumber: 25,
       columnNumber: 9
     }
   }, __jsx("h2", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16,
+      lineNumber: 26,
       columnNumber: 13
     }
   }, "Currently Showing ", selectedCountry), __jsx("select", {
     style: {
       width: "300px",
-      height: "35px",
+      height: "36px",
       margin: "15px"
     },
-    onChange: e => {
-      setSelectedCountry(e.target.value);
+    onChange: el => {
+      setSelectedCountry(el.target.value);
     },
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17,
+      lineNumber: 27,
       columnNumber: 13
     }
-  }, Object.entries(countries.countries).map(([country, code]) => __jsx("option", {
-    //selected={selectedCountry === countries.iso3[code]}
-    selected: selectedCountry === code,
-    key: code //value={countries.iso3[code]}
-    ,
-    value: countries.code,
+  }, Object.entries(newStructure.countries).map(([country, code]) => __jsx("option", {
+    selected: selectedCountry === newStructure.iso3[code],
+    key: code,
+    value: newStructure.iso3[code],
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23,
+      lineNumber: 33,
       columnNumber: 21
     }
   }, country))), __jsx(_Stats__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -193,7 +201,7 @@ function CountrySelector() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34,
+      lineNumber: 42,
       columnNumber: 13
     }
   }));
@@ -361,17 +369,12 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-const GlobalStyle = styled_components__WEBPACK_IMPORTED_MODULE_1__["createGlobalStyle"]`
-  html {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-`;
 function IndexPage() {
   return __jsx("div", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14,
+      lineNumber: 9,
       columnNumber: 9
     }
   }, __jsx("header", {
@@ -383,7 +386,7 @@ function IndexPage() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15,
+      lineNumber: 10,
       columnNumber: 13
     }
   }, "Total World Stats:"), __jsx(_components_Stats__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -391,14 +394,14 @@ function IndexPage() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17,
+      lineNumber: 11,
       columnNumber: 13
     }
   }), __jsx(_components_CountrySelector__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18,
+      lineNumber: 12,
       columnNumber: 13
     }
   }));
@@ -433,13 +436,13 @@ function useStats(url) {
     1: setError
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])();
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log('Mounting or updating');
+    console.log('Updating Data');
 
     async function fetchData() {
       setLoading(true);
       setError();
       console.log('Fetching Data');
-      const data = await fetch(url).then(res => res.json()).catch(err => {
+      const data = await fetch(url).then(response => response.json()).catch(err => {
         setError(err);
       });
       setStats(data);
@@ -457,7 +460,7 @@ function useStats(url) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

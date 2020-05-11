@@ -11,21 +11,29 @@ export default function CountrySelector() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error...</p>;
 
+    let newStructure = {
+        countries: {},
+        iso3: {}
+    };
+    for (let country of countries.countries) {
+
+        newStructure.countries[country.name] = country.iso2;
+        newStructure.iso3[country.iso2] = country.iso3;
+    }
+
     return (
         <div>
             <h2>Currently Showing {selectedCountry}</h2>
-            <select style={{ width: "300px", height: "35px", margin: "15px" }}
-                onChange={e => {
-                    setSelectedCountry(e.target.value);
+            <select style={{ width: "300px", height: "36px", margin: "15px" }}
+                onChange={el => {
+                    setSelectedCountry(el.target.value);
                 }}
             >
-                {Object.entries(countries.countries).map(([country, code]) => (
+                {Object.entries(newStructure.countries).map(([country, code]) => (
                     <option
-                        //selected={selectedCountry === countries.iso3[code]}
-                        selected={selectedCountry === code}
+                        selected={selectedCountry === newStructure.iso3[code]}
                         key={code}
-                        //value={countries.iso3[code]}
-                        value={countries.code}
+                        value={newStructure.iso3[code]}
                     >
                         {country}
                     </option>

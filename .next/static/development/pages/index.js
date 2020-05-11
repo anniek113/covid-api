@@ -20,6 +20,13 @@ var _jsxFileName = "/Users/anniekuniansky/Desktop/covid-api/components/CountrySe
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
 
 
 function CountrySelector() {
@@ -58,50 +65,68 @@ function CountrySelector() {
       columnNumber: 23
     }
   }, "Error...");
+  var newStructure = {
+    countries: {},
+    iso3: {}
+  };
+
+  var _iterator = _createForOfIteratorHelper(countries.countries),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var country = _step.value;
+      newStructure.countries[country.name] = country.iso2;
+      newStructure.iso3[country.iso2] = country.iso3;
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
   return __jsx("div", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15,
+      lineNumber: 25,
       columnNumber: 9
     }
   }, __jsx("h2", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16,
+      lineNumber: 26,
       columnNumber: 13
     }
   }, "Currently Showing ", selectedCountry), __jsx("select", {
     style: {
       width: "300px",
-      height: "35px",
+      height: "36px",
       margin: "15px"
     },
-    onChange: function onChange(e) {
-      setSelectedCountry(e.target.value);
+    onChange: function onChange(el) {
+      setSelectedCountry(el.target.value);
     },
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17,
+      lineNumber: 27,
       columnNumber: 13
     }
-  }, Object.entries(countries.countries).map(function (_ref) {
+  }, Object.entries(newStructure.countries).map(function (_ref) {
     var _ref2 = Object(_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_ref, 2),
         country = _ref2[0],
         code = _ref2[1];
 
     return __jsx("option", {
-      //selected={selectedCountry === countries.iso3[code]}
-      selected: selectedCountry === code,
-      key: code //value={countries.iso3[code]}
-      ,
-      value: countries.code,
+      selected: selectedCountry === newStructure.iso3[code],
+      key: code,
+      value: newStructure.iso3[code],
       __self: _this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 23,
+        lineNumber: 33,
         columnNumber: 21
       }
     }, country);
@@ -110,7 +135,7 @@ function CountrySelector() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34,
+      lineNumber: 42,
       columnNumber: 13
     }
   }));
@@ -4503,39 +4528,25 @@ if ( true && typeof window !== 'undefined') {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return IndexPage; });
-/* harmony import */ var _babel_runtime_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-/* harmony import */ var _utils_useStats__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/useStats */ "./utils/useStats.js");
-/* harmony import */ var _components_Stats__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Stats */ "./components/Stats.js");
-/* harmony import */ var _components_CountrySelector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/CountrySelector */ "./components/CountrySelector.js");
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _utils_useStats__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/useStats */ "./utils/useStats.js");
+/* harmony import */ var _components_Stats__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Stats */ "./components/Stats.js");
+/* harmony import */ var _components_CountrySelector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/CountrySelector */ "./components/CountrySelector.js");
 var _jsxFileName = "/Users/anniekuniansky/Desktop/covid-api/pages/index.js";
 
-var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
-
-function _templateObject() {
-  var data = Object(_babel_runtime_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  html {\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n  }\n"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
-
-var GlobalStyle = Object(styled_components__WEBPACK_IMPORTED_MODULE_2__["createGlobalStyle"])(_templateObject());
 function IndexPage() {
   return __jsx("div", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14,
+      lineNumber: 9,
       columnNumber: 9
     }
   }, __jsx("header", {
@@ -4547,22 +4558,22 @@ function IndexPage() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15,
+      lineNumber: 10,
       columnNumber: 13
     }
-  }, "Total World Stats:"), __jsx(_components_Stats__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, "Total World Stats:"), __jsx(_components_Stats__WEBPACK_IMPORTED_MODULE_3__["default"], {
     url: "https://covid19.mathdro.id/api",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17,
+      lineNumber: 11,
       columnNumber: 13
     }
-  }), __jsx(_components_CountrySelector__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }), __jsx(_components_CountrySelector__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18,
+      lineNumber: 12,
       columnNumber: 13
     }
   }));
@@ -4600,7 +4611,7 @@ function useStats(url) {
       setError = _useState3[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    console.log('Mounting or updating');
+    console.log('Updating Data');
 
     function fetchData() {
       var data;
@@ -4612,8 +4623,8 @@ function useStats(url) {
               setError();
               console.log('Fetching Data');
               _context.next = 5;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch(url).then(function (res) {
-                return res.json();
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch(url).then(function (response) {
+                return response.json();
               })["catch"](function (err) {
                 setError(err);
               }));
@@ -4642,7 +4653,7 @@ function useStats(url) {
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!*********************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fanniekuniansky%2FDesktop%2Fcovid-api%2Fpages%2Findex.js&hotRouterUpdates=true ***!
   \*********************************************************************************************************************************************************/
@@ -4665,5 +4676,5 @@ module.exports = dll_2adc2403d89adc16ead0;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=index.js.map
